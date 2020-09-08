@@ -1,3 +1,10 @@
+#Firebase Config
+src/config/firebase-config.json
+
+package-lock.json
+yarn.lock
+build/
+
 # Logs
 logs
 *.log
