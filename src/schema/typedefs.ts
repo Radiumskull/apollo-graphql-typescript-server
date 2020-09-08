@@ -16,6 +16,7 @@ const typeDefs = gql`
 
   type Post {
     id: ID!
+    title: String!
     text: String!
     userId: String!
     user: User!
@@ -29,7 +30,8 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    createUser(email: String!, password: String!): String
+    createUser(email: String!, password: String!, userId: String!, date_of_birth: String!): String
+    createPost(title: String!, text: String!, userId : ID!): String
   }
 `;
 

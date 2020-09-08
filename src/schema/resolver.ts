@@ -33,6 +33,10 @@ const resolvers = {
     createUser: async (_: null, { email, password }: any) => {
       return email + ' ' + password;
     },
+    createPost: async(_: null, { title, text, userId }: any, { dataSources } : any) => {
+      const postId = dataSources.firebaseAPI.createDocument('posts', {title : title, text : text, userId : userId})
+      return(postId);
+    }
   },
 };
 

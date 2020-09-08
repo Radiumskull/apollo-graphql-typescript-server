@@ -40,9 +40,10 @@
     "apollo-datasource": "^0.7.2",
     "apollo-server": "^2.17.0",
     "apollo-server-caching": "^0.5.2",
-    "bcrypt": "^5.0.0",
+    "bcryptjs": "^2.4.3",
     "dataloader": "^2.0.0",
     "firebase-admin": "^9.1.1",
-    "graphql": "^15.3.0"
+    "graphql": "^15.3.0",
+    "jsonwebtoken": "^8.5.1"
   }
 }
