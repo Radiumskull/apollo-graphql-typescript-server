@@ -4,6 +4,11 @@ import { gql } from 'apollo-server';
 //Posts
 
 const typeDefs = gql`
+  type AuthResponse {
+    accessToken: String!
+    refreshToken: String!
+  }
+
   type User {
     id: ID!
     userId: String!
@@ -30,8 +35,12 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    createUser(email: String!, password: String!, userId: String!, date_of_birth: String!): String
-    createPost(title: String!, text: String!, userId : ID!): String
+    createUser(
+      email: String!
+      password: String!
+      displayName: String!
+    ): AuthResponse
+    createPost(title: String!, text: String!, userId: ID!): String
   }
 `;
 

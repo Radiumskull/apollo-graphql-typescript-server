@@ -1,8 +1,7 @@
 import { DataSource } from 'apollo-datasource';
 import { InMemoryLRUCache } from 'apollo-server-caching';
-import { ApolloError, ValidationError } from 'apollo-server';
-import admin from '../config/firebase';
-import { firestore } from 'firebase-admin';
+import { ApolloError } from 'apollo-server';
+import admin from '../../config/firebase';
 
 class FirebaseDataSource extends DataSource {
   context: any;
@@ -57,13 +56,13 @@ class FirebaseDataSource extends DataSource {
     }
   }
 
-  async createDocument(docPath: string, data : object){
-    try{
+  async createDocument(docPath: string, data: object) {
+    try {
       const document = await admin
-      .firestore()
-      .collection(docPath)
-      .add({...data, createdAt : admin.firestore.Timestamp.now() });
-      return(document.id);
+        .firestore()
+        .collection(docPath)
+        .add({ ...data, createdAt: admin.database.ServerValue.TIMESTAMP });
+      return document.id;
     } catch (err) {
       throw new ApolloError(err);
     }

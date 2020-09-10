@@ -18,7 +18,7 @@ const resolvers = {
   },
 
   Query: {
-    posts: (_: any, __: any, { dataSources }: any) => {
+    posts: (_: any, __: any, { dataSources, dummy }: any) => {
       return dataSources.firebaseAPI.getCollection('posts', PostMap);
     },
     users: (_: any, __: any, { dataSources }: any) => {
@@ -30,13 +30,33 @@ const resolvers = {
   },
 
   Mutation: {
-    createUser: async (_: null, { email, password }: any) => {
-      return email + ' ' + password;
+    createUser: async (
+      _: null,
+      { displayName, email, password }: any,
+      { dataSources }: any,
+    ) => {
+      const authToken = dataSources.authAPI.createUser(
+        displayName,
+        email,
+        password,
+      );
+      return authToken;
     },
-    createPost: async(_: null, { title, text, userId }: any, { dataSources } : any) => {
-      const postId = dataSources.firebaseAPI.createDocument('posts', {title : title, text : text, userId : userId})
-      return(postId);
-    }
+    createPost: async (
+      _: null,
+      { title, text, userId }: any,
+      { dataSources }: any,
+    ) => {
+      const postId = dataSources.firebaseAPI.createDocument('posts', {
+        title: title,
+        text: text,
+        userId: userId,
+      });
+      return {
+        response: 'Success',
+        postId: postId,
+      };
+    },
   },
 };
 
